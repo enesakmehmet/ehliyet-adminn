@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../services/apiClient';
 
-const API_URL = import.meta.env.VITE_API_URL || 'https://zesty-consideration-production.up.railway.app/api';
+// API URL is configured in apiClient.ts
 
 interface Stats {
     totalUsers: number;
@@ -20,7 +20,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const response = await axios.get(`${API_URL}/admin/stats`);
+                const response = await api.get('/admin/stats');
                 setStats(response.data);
                 setError(null);
             } catch (err) {
