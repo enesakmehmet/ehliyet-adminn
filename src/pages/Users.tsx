@@ -34,7 +34,9 @@ const UsersPage = () => {
         const fetchUsers = async () => {
             try {
                 const response = await api.get('/admin/users');
-                setUsers(response.data.users || response.data);
+                // Backend returns {success: true, data: {users: [...]}}
+                const usersData = response.data.data?.users || response.data.users || response.data;
+                setUsers(Array.isArray(usersData) ? usersData : []);
                 setError(null);
             } catch (err) {
                 console.error('Failed to fetch users:', err);

@@ -21,7 +21,9 @@ const Dashboard = () => {
         const fetchStats = async () => {
             try {
                 const response = await api.get('/admin/dashboard');
-                setStats(response.data);
+                // Backend returns {success: true, data: {stats: {...}}}
+                const statsData = response.data.data?.stats || response.data.stats || response.data;
+                setStats(statsData);
                 setError(null);
             } catch (err) {
                 console.error('Failed to fetch stats:', err);
