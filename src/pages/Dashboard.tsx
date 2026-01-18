@@ -82,7 +82,7 @@ const Dashboard = () => {
     return (
         <div>
             <div style={{ marginBottom: '32px' }}>
-                <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: '#1F2937', margin: 0 }}>Dashboard</h1>
+                <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: '#1F2937', margin: 0 }}>Dashboard <span style={{ fontSize: '12px', color: '#ccc' }}>v3</span></h1>
                 <p style={{ color: '#6B7280', marginTop: '4px' }}>Uygulama istatistiklerine genel bakış</p>
             </div>
 
