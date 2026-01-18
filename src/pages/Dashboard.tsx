@@ -20,7 +20,7 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const response = await api.get('/admin/stats');
+                const response = await api.get('/admin/dashboard');
                 setStats(response.data);
                 setError(null);
             } catch (err) {
