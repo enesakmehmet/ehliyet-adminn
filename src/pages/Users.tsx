@@ -50,7 +50,7 @@ const UsersPage = () => {
         fetchUsers();
     }, []);
 
-    const filteredUsers = users.filter(user =>
+    const filteredUsers = (Array.isArray(users) ? users : []).filter(user =>
         user.name?.toLowerCase().includes(search.toLowerCase()) ||
         user.email?.toLowerCase().includes(search.toLowerCase())
     );
