@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// Use environment variable for production, fallback to /api for development (proxy)
-const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+// Use environment variable for production, fallback to Railway backend URL
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://zesty-consideration-production.up.railway.app/api';
 
 const api = axios.create({
     baseURL: API_BASE_URL,
