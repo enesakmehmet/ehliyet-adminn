@@ -26,6 +26,9 @@ const mockUsers: User[] = [
 
 const UsersPage = () => {
     const [users, setUsers] = useState<User[]>([]);
+    // Debug log to check if new version is deployed
+    console.log('UsersPage Loaded v3 - API URL:', import.meta.env.VITE_API_URL);
+
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
     const [error, setError] = useState<string | null>(null);
@@ -33,11 +36,21 @@ const UsersPage = () => {
     useEffect(() => {
         const fetchUsers = async () => {
             try {
+                console.log('Fetching users...');
                 const response = await api.get('/admin/users');
+                console.log('API Response:', response);
+
                 // Backend returns {success: true, data: {users: [...]}}
                 const usersData = response.data.data?.users || response.data.users || response.data;
-                setUsers(Array.isArray(usersData) ? usersData : []);
-                setError(null);
+
+                if (Array.isArray(usersData)) {
+                    setUsers(usersData);
+                    setError(null);
+                } else {
+                    console.warn('Unexpected data format:', usersData);
+                    setUsers(mockUsers); // Fallback to mocks if data is weird
+                    setError('Veri formatı hatalı, demo veriler gösteriliyor.');
+                }
             } catch (err) {
                 console.error('Failed to fetch users:', err);
                 setError('Backend bağlantısı kurulamadı. Demo veriler gösteriliyor.');
@@ -67,7 +80,7 @@ const UsersPage = () => {
         <div>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '16px' }}>
                 <div>
-                    <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: '#1F2937', margin: 0 }}>Kullanıcılar</h1>
+                    <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: '#1F2937', margin: 0 }}>Kullanıcılar <span style={{ fontSize: '12px', color: '#ccc' }}>v3</span></h1>
                     <p style={{ color: '#6B7280', marginTop: '4px' }}>Tüm kayıtlı kullanıcıları yönetin ({users.length} kullanıcı)</p>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
