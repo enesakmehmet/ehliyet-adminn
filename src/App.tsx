@@ -4,6 +4,7 @@ import Dashboard from './pages/Dashboard';
 import UsersPage from './pages/Users';
 import LogsPage from './pages/Logs';
 import QuestionsPage from './pages/Questions';
+import NotificationsPage from './pages/Notifications';
 
 // Placeholder Pages
 const ComingSoon = ({ title }: { title: string }) => (
@@ -30,6 +31,7 @@ const App = () => {
         <Route path="/users" element={<Layout><UsersPage /></Layout>} />
         <Route path="/questions" element={<Layout><QuestionsPage /></Layout>} />
         <Route path="/logs" element={<Layout><LogsPage /></Layout>} />
+        <Route path="/notifications" element={<Layout><NotificationsPage /></Layout>} />
         <Route path="/settings" element={<Layout><ComingSoon title="Ayarlar" /></Layout>} />
 
         {/* Redirect any unknown route to dashboard */}
