@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import Dashboard from './pages/Dashboard';
 import UsersPage from './pages/Users';
+import LogsPage from './pages/Logs';
+import QuestionsPage from './pages/Questions';
 
 // Placeholder Pages
 const ComingSoon = ({ title }: { title: string }) => (
@@ -26,8 +28,8 @@ const App = () => {
         {/* All routes are now public - no login required */}
         <Route path="/" element={<Layout><Dashboard /></Layout>} />
         <Route path="/users" element={<Layout><UsersPage /></Layout>} />
-        <Route path="/questions" element={<Layout><ComingSoon title="Soru Yönetimi" /></Layout>} />
-        <Route path="/logs" element={<Layout><ComingSoon title="Sistem Logları" /></Layout>} />
+        <Route path="/questions" element={<Layout><QuestionsPage /></Layout>} />
+        <Route path="/logs" element={<Layout><LogsPage /></Layout>} />
         <Route path="/settings" element={<Layout><ComingSoon title="Ayarlar" /></Layout>} />
 
         {/* Redirect any unknown route to dashboard */}
