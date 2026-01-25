@@ -9,6 +9,7 @@ const Sidebar = () => {
         { icon: '❓', label: 'Sorular', path: '/questions' },
         { icon: '📋', label: 'Loglar', path: '/logs' },
         { icon: '🔔', label: 'Bildirimler', path: '/notifications' },
+        { icon: '⚙️', label: 'Ayarlar', path: '/settings' },
     ];
 
     const linkStyle = (isActive: boolean) => ({
