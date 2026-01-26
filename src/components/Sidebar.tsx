@@ -28,15 +28,12 @@ const Sidebar = () => {
 
     return (
         <div style={{
-            width: '256px',
+            width: '100%',
             backgroundColor: 'white',
             borderRight: '1px solid #E5E7EB',
-            height: '100vh',
+            height: '100%',
             display: 'flex',
             flexDirection: 'column',
-            position: 'fixed',
-            left: 0,
-            top: 0
         }}>
             {/* Logo */}
             <div style={{
