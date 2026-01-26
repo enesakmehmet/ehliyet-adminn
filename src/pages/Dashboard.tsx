@@ -81,9 +81,27 @@ const Dashboard = () => {
 
     return (
         <div>
-            <div style={{ marginBottom: '32px' }}>
-                <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: '#1F2937', margin: 0 }}>Dashboard <span style={{ fontSize: '12px', color: '#ccc' }}>v3</span></h1>
-                <p style={{ color: '#6B7280', marginTop: '4px' }}>Uygulama istatistiklerine genel bakış</p>
+            <div style={{ marginBottom: '32px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                    <h1 style={{ fontSize: '24px', fontWeight: 'bold', color: '#1F2937', margin: 0, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        Dashboard
+                        <span
+                            style={{ fontSize: '12px', color: '#ccc', cursor: 'pointer', opacity: 0.5 }}
+                            title="Raporu Tetikle"
+                            onClick={async () => {
+                                if (window.confirm('Telegram raporunu şimdi göndermek istiyor musun?')) {
+                                    try {
+                                        await api.post('/admin/trigger-report');
+                                        alert('Rapor gönderildi! 🚀');
+                                    } catch (e) {
+                                        alert('Hata!');
+                                    }
+                                }
+                            }}
+                        >📢</span>
+                    </h1>
+                    <p style={{ color: '#6B7280', marginTop: '4px' }}>Uygulama istatistiklerine genel bakış</p>
+                </div>
             </div>
 
             {/* Error/Demo Notice */}
