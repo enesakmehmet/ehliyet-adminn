@@ -232,6 +232,7 @@ const Settings = () => {
                         />
                     </div>
 
+                    {/* Exam Limits Section - Force Update */}
                     <div style={{ marginBottom: '24px' }}>
                         <h2 style={{ fontSize: '18px', fontWeight: 600, color: '#1F2937', marginBottom: '16px' }}>
                             🎟️ Sınav Hakkı Limitleri
