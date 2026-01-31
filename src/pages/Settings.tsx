@@ -1,11 +1,19 @@
 import { useEffect, useState } from 'react';
 import api from '../services/apiClient';
 
+interface ExamLimits {
+    freeExamsPerDay: number;
+    extraExamsPerAd: number;
+    maxExamsPerDay: number;
+    resetHour: number;
+}
+
 interface AppSettings {
     totalActiveQuestions: number;
     classicExamQuestionCount: number;
     quickTestQuestionCount: number;
     dailyQuestionGoal: number;
+    examLimits: ExamLimits;
 }
 
 const Settings = () => {
@@ -13,7 +21,13 @@ const Settings = () => {
         totalActiveQuestions: 500,
         classicExamQuestionCount: 50,
         quickTestQuestionCount: 10,
-        dailyQuestionGoal: 20
+        dailyQuestionGoal: 20,
+        examLimits: {
+            freeExamsPerDay: 1,
+            extraExamsPerAd: 1,
+            maxExamsPerDay: 10,
+            resetHour: 0
+        }
     });
     const [loading, setLoading] = useState(true);
     const [saving, setSaving] = useState(false);
@@ -57,6 +71,13 @@ const Settings = () => {
 
     const handleChange = (key: keyof AppSettings, value: number) => {
         setSettings(prev => ({ ...prev, [key]: value }));
+    };
+
+    const handleExamLimitChange = (key: keyof ExamLimits, value: number) => {
+        setSettings(prev => ({
+            ...prev,
+            examLimits: { ...prev.examLimits, [key]: value }
+        }));
     };
 
     const SettingCard = ({
@@ -208,6 +229,45 @@ const Settings = () => {
                             onChange={(val) => handleChange('dailyQuestionGoal', val)}
                             min={5}
                             max={100}
+                        />
+                    </div>
+
+                    <div style={{ marginBottom: '24px' }}>
+                        <h2 style={{ fontSize: '18px', fontWeight: 600, color: '#1F2937', marginBottom: '16px' }}>
+                            🎟️ Sınav Hakkı Limitleri
+                        </h2>
+                        <p style={{ color: '#6B7280', marginBottom: '16px', fontSize: '14px' }}>
+                            Kullanıcıların günlük sınav haklarını ve reklam ile kazanabilecekleri hakları ayarlayın.
+                        </p>
+
+                        <SettingCard
+                            icon="🆓"
+                            title="Günlük Ücretsiz Sınav Hakkı"
+                            description="Her kullanıcının günde ücretsiz girebileceği sınav sayısı"
+                            value={settings.examLimits?.freeExamsPerDay || 1}
+                            onChange={(val) => handleExamLimitChange('freeExamsPerDay', val)}
+                            min={0}
+                            max={10}
+                        />
+
+                        <SettingCard
+                            icon="📺"
+                            title="Reklam Başına Ek Sınav Hakkı"
+                            description="Bir reklam izleyince kazanılacak ek sınav hakkı sayısı"
+                            value={settings.examLimits?.extraExamsPerAd || 1}
+                            onChange={(val) => handleExamLimitChange('extraExamsPerAd', val)}
+                            min={1}
+                            max={5}
+                        />
+
+                        <SettingCard
+                            icon="🔒"
+                            title="Günlük Maksimum Sınav Sayısı"
+                            description="Bir kullanıcının (reklamlar dahil) günde girebileceği maksimum sınav sayısı"
+                            value={settings.examLimits?.maxExamsPerDay || 10}
+                            onChange={(val) => handleExamLimitChange('maxExamsPerDay', val)}
+                            min={1}
+                            max={50}
                         />
                     </div>
 
